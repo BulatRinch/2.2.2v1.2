@@ -19,13 +19,12 @@ public class CarService {
         cars.add(new Car(5, "Toyota", "RAV4"));
     }
 
-    public List<Car> showAll(String id) {
-        int num;
-        if (id==null) {
-            id="5";
+    public List<Car> showAll(Integer count) {
+        if ((count==null)||(count<0)) {
+            count=5;
         }
-        num=Integer.parseInt(id);
-        return cars.stream().filter((p)->p.getId()<=num).collect(Collectors.toList());
+
+        return cars.stream().limit(count).collect(Collectors.toList());
     }
 
 

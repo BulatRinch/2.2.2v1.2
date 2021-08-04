@@ -32,9 +32,11 @@ public class HelloController {
 
 
 	@GetMapping(value = "/cars")
-	public String getCars (@RequestParam(value = "count", required = false) String id, Model model) {
+	public String getCars (@RequestParam(value = "count", required = false) Integer count, Model model) {
+		// count пришлось привести к обёртке Integer, так как на странице выходит ошибка при отсутствии параметров
+		// при отсутствии параметров, им присваивается null, int не может быть null - поэтому ошибка
 
-		model.addAttribute("auto", carService.showAll(id));
+		model.addAttribute("auto", carService.showAll(count));
 		return "cars";
 	}
 	
